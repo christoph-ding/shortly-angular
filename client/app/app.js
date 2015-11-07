@@ -1,10 +1,17 @@
+//configurating the angular app, and creating dependencies
 angular.module('shortly', [
   'shortly.services',
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
   'ngRoute'
+  // 'shortly.testing'
 ])
+
+// this is client side angular "routing" 
+// what ISN"T HERE... is routing to the database
+// all database routing / serving / data pushing / getting is handled by services.js
+
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when('/signin', {
@@ -16,11 +23,21 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     // Your code here
-
+    .when('/', {
+      templateUrl: 'app/auth/signin.html',
+      controller: 'LinksController'
+    })
+    .when('/links', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
 })
+
+/// this handles sessions
+
 .factory('AttachTokens', function ($window) {
   // this is an $httpInterceptor
   // its job is to stop all out going request
@@ -38,6 +55,7 @@ angular.module('shortly', [
   };
   return attach;
 })
+
 .run(function ($rootScope, $location, Auth) {
   // here inside the run phase of angular, our services and controllers
   // have just been registered and our app is ready
@@ -48,7 +66,19 @@ angular.module('shortly', [
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      $location.path('/signin');
+      // $location.path('/signin');
+
+      // this is meant to bring you to signin when you are WRONG
+      console.log('not auth!');
+    } else {
+      console.log('what is goingon')
     }
+            
   });
-});
+})
+
+// .controller('testController', function($scope) {
+//   console.log("whoooooa");
+//   $scope.message = "Test Controller is working"
+// });
+

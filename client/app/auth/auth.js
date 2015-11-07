@@ -27,4 +27,16 @@ angular.module('shortly.auth', [])
         console.error(error);
       });
   };
+
+
+  $scope.sendRequest = function () {
+
+  }
+
+
+
+
+
+
+
 });
