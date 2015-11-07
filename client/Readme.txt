@@ -14,4 +14,7 @@
 
 client:
   1.  sign in    - front end works?  but not sending data...
-  2.  
+  2.  when sending post request for user signin or up: {username:username, password: password}, path /api/users/signin or /signup
+
+
+server:

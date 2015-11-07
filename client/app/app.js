@@ -23,10 +23,10 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     // Your code here
-    .when('/', {
-      templateUrl: 'app/auth/signin.html',
-      controller: 'LinksController'
-    })
+    // .when('/', {
+    //   templateUrl: 'app/auth/signin.html',
+    //   controller: 'LinksController'
+    // })
     .when('/links', {
       templateUrl: 'app/links/links.html',
       controller: 'LinksController'
@@ -66,13 +66,13 @@ angular.module('shortly', [
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-      // $location.path('/signin');
-
-      // this is meant to bring you to signin when you are WRONG
+      $location.path('/signin');
+      // this is meant to bing you to signin when you are WRONG
       console.log('not auth!');
-    } else {
-      console.log('what is goingon')
-    }
+    } 
+    // else {
+    //   $location.path('/links');      
+    // }
             
   });
 })

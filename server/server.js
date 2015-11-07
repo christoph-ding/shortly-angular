@@ -14,7 +14,6 @@ app.listen(8000);
 
 module.exports = app;
 
-
 /* Walkthrough of the server
 
   Express, mongoose, and our server are initialzed here
